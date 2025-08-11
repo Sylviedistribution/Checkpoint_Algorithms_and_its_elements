@@ -1,0 +1,48 @@
+ALGORITHM read_a_sentence
+ 
+VAR
+    sentence: STRING;
+    sentence_length: INTEGER;
+    number_of_words: INTEGER;
+    number_of_vowels: INTEGER;
+    vowels_list : STRING;
+    char: CHAR;
+    i: INTEGER;
+    j: INTEGER;
+BEGIN
+    vowels_list := "aeiouyAEIOUY";
+    sentence_length := 0;
+    number_of_words := 0;
+    number_of_vowels := 0;
+
+    WRITE("Please enter a sentence: ");
+    READ(sentence);
+    
+    FOR i FROM 0 TO sentence.length STEP 1 DO
+        char := sentence[i];
+        sentence_length := sentence_length + 1;
+
+        // Si on atteint le point, on arrête tout
+        IF (char = ".") THEN
+            BREAK;
+        END_IF
+
+        IF (sentence[i] = " ") THEN 
+            number_of_words := number_of_words + 1;
+        END_IF
+
+        FOR j FROM 0 TO vowels_list.length STEP 1 DO
+            IF (char = vowels_list[j]) THEN
+                number_of_vowels := number_of_vowels + 1;
+            set_instructions
+        END_FOR
+
+        WRITE("Length: ", sentence_length);
+        WRITE("Words: ", number_of_words);
+        WRITE("Vowels: ", number_of_vowels);
+        
+    END_FOR
+
+
+
+END
