@@ -45,6 +45,7 @@ BEGIN
         
     END_FOR
     number_of_words := number_of_words + 1;  // To count the last word
+    sentence_length := sentence_length + 1;
     
     WRITE("Length: ", sentence_length);
     WRITE("Words: ", number_of_words);
