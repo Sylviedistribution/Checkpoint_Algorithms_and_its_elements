@@ -6,10 +6,12 @@ VAR
     number_of_words: INTEGER;
     number_of_vowels: INTEGER;
     vowels_list : STRING;
+    alphabet: STRING;
     char: CHAR;
     i: INTEGER;
     j: INTEGER;
 BEGIN
+    alphabet := "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     vowels_list := "aeiouyAEIOUY";
     sentence_length := 0;
     number_of_words := 0;
@@ -17,32 +19,35 @@ BEGIN
 
     WRITE("Please enter a sentence: ");
     READ(sentence);
-    
-    FOR i FROM 0 TO sentence.length STEP 1 DO
+   
+
+    WHILE sentence.length = 0  OR sentence[sentence.length-1] <> "." OR NOT (sentence[0] >= "A" AND sentence[0] <= "Z") DO
+        WRITE("The sentence must end with a point. Please try again: ");
+        READ(sentence);
+    END_WHILE
+
+
+    FOR i FROM 0 TO sentence.length-1  STEP 1 DO
         char := sentence[i];
         sentence_length := sentence_length + 1;
 
-        // Si on atteint le point, on arrête tout
-        IF (char = ".") THEN
-            BREAK;
-        END_IF
-
-        IF (sentence[i] = " ") THEN 
+        IF ((char = " " OR char = "\n" OR char = "\t") AND
+                sentence[i + 1] <> " " &&
+                sentence[i + 1] <> ".") THEN 
             number_of_words := number_of_words + 1;
         END_IF
 
-        FOR j FROM 0 TO vowels_list.length STEP 1 DO
+        FOR j FROM 0 TO vowels_list.length - 1 STEP 1 DO
             IF (char = vowels_list[j]) THEN
                 number_of_vowels := number_of_vowels + 1;
-            set_instructions
+            END_IF
         END_FOR
-
-        WRITE("Length: ", sentence_length);
-        WRITE("Words: ", number_of_words);
-        WRITE("Vowels: ", number_of_vowels);
         
     END_FOR
-
-
+    number_of_words := number_of_words + 1;  // To count the last word
+    
+    WRITE("Length: ", sentence_length);
+    WRITE("Words: ", number_of_words);
+    WRITE("Vowels: ", number_of_vowels);
 
 END
